@@ -1,3 +1,5 @@
+export { scanAnomalyCandidates, toClosedBars } from "./adapters/watch-monitor.js";
+export type { AnomalyCandidate, WatchOhlcvSeries } from "./adapters/watch-monitor.js";
 export { DEFAULT_TREND_CONFIG, resolveTrendConfig } from "./config.js";
 export { assessTrend } from "./engine.js";
 export { scanCandidates } from "./scanner.js";
