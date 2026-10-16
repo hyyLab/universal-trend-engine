@@ -9,6 +9,7 @@ export function createTrendState(symbol: string): TrendState {
     consecutiveObservations: 0,
     changedAt: null,
     lastUpdatedAt: null,
+    lastObservationKey: null,
     lastScore: 0
   };
 }
@@ -35,6 +36,13 @@ export function updateTrendState(
     };
     return { ...next, assessment };
   }
+
+  const observationKey = assessment.features?.latestBarTime;
+  if (observationKey !== undefined && observationKey === previous.lastObservationKey) {
+    // Polling the same closed bar must not count as another confirmation.
+    return { ...next, assessment };
+  }
+  if (observationKey !== undefined) next.lastObservationKey = observationKey;
 
   const direction: TrendDirection = assessment.direction;
   const sameCandidate = previous.phase === "candidate" && previous.candidateDirection === direction;
