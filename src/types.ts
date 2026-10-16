@@ -64,6 +64,8 @@ export interface TrendState {
   consecutiveObservations: number;
   changedAt: number | null;
   lastUpdatedAt: number | null;
+  /** Timestamp of the last distinct bar counted toward confirmation. */
+  lastObservationKey: number | null;
   lastScore: number;
 }
 
