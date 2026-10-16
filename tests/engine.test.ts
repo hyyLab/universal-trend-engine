@@ -8,8 +8,8 @@ function risingBars(count = 20): Bar[] {
     return {
       time: 1_800_000_000_000 + index * 60_000,
       open: index === 0 ? close : 100 * Math.pow(1.004, index - 1),
-      high: close * 1.002,
-      low: close * 0.998,
+      high: Math.max(close, index === 0 ? close : 100 * Math.pow(1.004, index - 1)) * 1.002,
+      low: Math.min(close, index === 0 ? close : 100 * Math.pow(1.004, index - 1)) * 0.998,
       close,
       volume: index >= count - 3 ? 2_500 : 1_000
     };
